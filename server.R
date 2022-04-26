@@ -1,20 +1,31 @@
-library(shiny)
+#
+# This is the server logic of a Shiny web application. You can run the 
+# application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+# 
+#    http://shiny.rstudio.com/
+#
 
-# Define server logic required to draw a histogram
-shinyServer(
-        function(input, output) {
-                
-                dataInput <- reactive({
-                        getSymbols(input$symb, src = "Russian",
-                                   from = input$dates[1],
-                                   to = input$dates[2],
-                                   auto.assign = FALSE)
-                })
-                
-                output$plot <- renderPlot({
-                        
-                        chartSeries(dataInput(), theme = chartTheme("white"), show.grid = TRUE,
-                                    type = "line", TA = NULL)
-                })
-                
-        })
+# Load required libraries
+library(shiny)
+library(tm)
+
+# Function to custom clean enetered text phrase
+custom_input_text_clean <- function (testline) 
+{
+        line <- iconv(testline, "latin1", "ASCII", sub = "")
+        line <- gsub('[0-9]+', '', line)
+        line <- tolower(line)
+        line <- removeWords(line, stopwords())
+        line <- removePunctuation(line)
+        line <- gsub('\\S+[^\x20-\x7E]', '', line)
+        emptyLines <- grepl('^\\s*$', line)
+        line <- line[!emptyLines]
+        line <- stripWhitespace(line)
+        #line <- gsub("^ +| +$|( ) +", "\\1", line)
+        return(line)
+}
+
+        
+        

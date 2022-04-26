@@ -1,6 +1,3 @@
 # Peer-graded Assignment: Final Project Submission
 
-The app developed for the first part of the assignment is avalilable at: 
-[URL]( https://phuchuyvo987.shinyapps.io/shiny-application-and-reproducible-pitch/)
-
-The presentation: [URL](https://rpubs.com/PhucHuyVo/893610)
+The goal of this exercise is to create a product to highlight the prediction algorithm that you have built and to provide an interface that can be accessed by others.
